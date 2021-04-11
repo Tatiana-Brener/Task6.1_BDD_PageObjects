@@ -14,6 +14,7 @@ public class DashboardPageOfCards {
     private final String balanceFinish = " р.";
 
     public DashboardPageOfCards() {
+
         heading.shouldBe(Condition.visible);
     }
 
