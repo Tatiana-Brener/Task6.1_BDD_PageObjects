@@ -20,14 +20,9 @@ public class MoneyTransferTests {
         val verificationCode = DataHelper.getVerificationCodeFor(authInfo);
         verificationPage.validVerify(verificationCode);
         val dashboardPageOfCardsRecharge = new DashboardPageOfCardsRecharge();
-
         val dashboardPageOfCards = new DashboardPageOfCards();
-//        val dataHelper = new DataHelper();
-//        val amountForTransfer = DataHelper.getValidAmount();
-        if (dashboardPageOfCards.getFirstCardBalance() >= Integer.parseInt(DataHelper.getValidAmount())) {
-            dashboardPageOfCardsRecharge.transferMoneyFromFirstCardToTheSecond
+        dashboardPageOfCardsRecharge.transferMoneyFromFirstCardToTheSecond
                     (DataHelper.getValidAmount(), DataHelper.getFirstCardNumber());
-        }
         dashboardPageOfCards.getFirstCardBalance();
         dashboardPageOfCards.getSecondCardBalance();
         }
