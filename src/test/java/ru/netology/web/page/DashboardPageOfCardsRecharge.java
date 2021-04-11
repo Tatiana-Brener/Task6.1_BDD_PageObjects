@@ -1,6 +1,8 @@
 package ru.netology.web.page;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import lombok.val;
 import ru.netology.web.data.DataHelper;
 
@@ -9,30 +11,31 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class DashboardPageOfCardsRecharge {
+    private ElementsCollection buttonsRefill= $$("[data-test-id=action-deposit]");
+    private SelenideElement heading = $(withText("Пополнение карты"));
+    private SelenideElement fieldAmount = $("[data-test-id=amount] .input__control");
+    private SelenideElement fieldFrom = $("[data-test-id=from] .input__control");
+    private SelenideElement buttonActionTransfer = $("[data-test-id=action-transfer]");
 
-    public DashboardPageOfCards transferMoneyFromFirstCardToTheSecond(String amount, DataHelper.CardNumber cardNumber) {
+        public DashboardPageOfCards transferMoneyFromFirstCardToTheSecond
+                (DataHelper.AmountForTransfer amountForTransfer, DataHelper.CardNumber cardNumber) {
+        buttonsRefill.last().click();
+        heading.shouldBe(Condition.visible);
+        fieldAmount.setValue(amountForTransfer.getAmount());
+        fieldFrom.setValue(cardNumber.getNumber());
+        buttonActionTransfer.click();
 
-        val dashboradPageOfCards = new DashboardPageOfCards();
-        if(dashboradPageOfCards.getFirstCardBalance() >= Integer.parseInt(amount)) {
-            $$("[data-test-id=action-deposit]").first().click();
-            $(withText("Пополнение карты")).shouldBe(Condition.visible);
-            $("[data-test-id=amount] .input__control").setValue(amount);
-            $("[data-test-id=from] .input__control").setValue(cardNumber.getNumber());
-            $("[data-test-id=action-transfer]").click();
-        }
         return new DashboardPageOfCards();
     }
 
-    public DashboardPageOfCards transferMoneyFromSecondCardToTheFirst(String amount, DataHelper.CardNumber cardNumber) {
+    public DashboardPageOfCards transferMoneyFromSecondCardToTheFirst
+            (DataHelper.AmountForTransfer amountForTransfer, DataHelper.CardNumber cardNumber) {
+        buttonsRefill.first().click();
+        heading.shouldBe(Condition.visible);
+        fieldAmount.setValue(amountForTransfer.getAmount());
+        fieldFrom.setValue(cardNumber.getNumber());
+        buttonActionTransfer.click();
 
-        val dashboradPageOfCards = new DashboardPageOfCards();
-        if(dashboradPageOfCards.getSecondCardBalance() >= Integer.parseInt(amount)) {
-            $$("[data-test-id=action-deposit]").last().click();
-            $(withText("Пополнение карты")).shouldBe(Condition.visible);
-            $("[data-test-id=amount] .input__control").setValue(amount);
-            $("[data-test-id=from] .input__control").setValue(cardNumber.getNumber());
-            $("[data-test-id=action-transfer]").click();
-        }
         return new DashboardPageOfCards();
     }
 }
