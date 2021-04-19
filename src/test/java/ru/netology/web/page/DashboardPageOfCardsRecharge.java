@@ -38,4 +38,16 @@ public class DashboardPageOfCardsRecharge {
 
         return new DashboardPageOfCards();
     }
+
+    public DashboardPageOfCards notTransferMoneyFromFirstCardToTheSecond
+            (DataHelper.AmountForTransfer amountForTransfer, DataHelper.CardNumber cardNumber) {
+        buttonsRefill.last().click();
+        heading.shouldBe(Condition.visible);
+        fieldAmount.setValue(amountForTransfer.getAmount());
+        fieldFrom.setValue(cardNumber.getNumber());
+        buttonActionTransfer.click();
+
+        return new DashboardPageOfCards();
+    }
+
 }
