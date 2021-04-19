@@ -21,14 +21,20 @@ public class MoneyTransferTests {
         verificationPage.validVerify(verificationCode);
         val dashboardPageOfCardsRecharge = new DashboardPageOfCardsRecharge();
         val dashboardPageOfCards = new DashboardPageOfCards();
+
+        val balanceFirstCardBeforTransfer = dashboardPageOfCards.getFirstCardBalance();
+        val balanceSecondCardBeforTransfer = dashboardPageOfCards.getSecondCardBalance();
+
         dashboardPageOfCardsRecharge.transferMoneyFromFirstCardToTheSecond
                     (DataHelper.getValidAmount(), DataHelper.getFirstCardNumber());
-        dashboardPageOfCards.getFirstCardBalance();
-        dashboardPageOfCards.getSecondCardBalance();
+
+        val balanceFirstCardAfterTransfer = dashboardPageOfCards.getFirstCardBalance();
+        val balanceSecondCardAfterTransfer = dashboardPageOfCards.getSecondCardBalance();
         }
 
+
     @Test
-    void shouldNotTransferMoneyFromFirstCardToTheSecond() {
+    void shouldNotTransferMoneyFromFirstCardToTheSecond2() {
         open("http://localhost:9999");
         val loginPage = new LoginPage();
         val authInfo = DataHelper.getAuthInfo();
@@ -37,12 +43,17 @@ public class MoneyTransferTests {
         verificationPage.validVerify(verificationCode);
         val dashboardPageOfCardsRecharge = new DashboardPageOfCardsRecharge();
 
-        dashboardPageOfCardsRecharge.transferMoneyFromFirstCardToTheSecond
-                (DataHelper.getInvalidAmount(), DataHelper.getFirstCardNumber());
         val dashboardPageOfCards = new DashboardPageOfCards();
 
-        dashboardPageOfCards.getFirstCardBalance();
-        dashboardPageOfCards.getSecondCardBalance();
+        val balanceFirstCardBeforTransfer = dashboardPageOfCards.getFirstCardBalance();
+        val balanceSecondCardBeforTransfer = dashboardPageOfCards.getSecondCardBalance();
+
+        dashboardPageOfCardsRecharge.transferMoneyFromFirstCardToTheSecond
+                (DataHelper.getInvalidAmount(), DataHelper.getFirstCardNumber());
+
+        val balanceFirstCardAfterTransfer = balanceFirstCardBeforTransfer;
+        val balanceSecondCardAfterTransfer = balanceSecondCardBeforTransfer;
+
     }
 
 }
