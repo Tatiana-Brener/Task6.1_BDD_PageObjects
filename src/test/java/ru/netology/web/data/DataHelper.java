@@ -45,11 +45,13 @@ public class DataHelper {
         private String amount;
     }
 
-    public static AmountForTransfer getValidAmount() {
-        return new AmountForTransfer("200");
+    public static String getValidAmount() {
+        String validAmount = "200";
+        return validAmount;
     }
 
-    public static AmountForTransfer getInvalidAmount() {
-        return new AmountForTransfer("20000");
+    public static String getInvalidAmount() {
+        String invalidAmount = "20000";
+        return invalidAmount;
     }
 }
