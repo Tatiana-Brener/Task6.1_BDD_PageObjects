@@ -26,8 +26,8 @@ public class MoneyTransferTests {
         val balanceFirstCardBeforTransfer = dashboardPageOfCards.getFirstCardBalance();
         val balanceSecondCardBeforTransfer = dashboardPageOfCards.getSecondCardBalance();
 
-        dashboardPageOfCardsRecharge.transferMoneyFromFirstCardToTheSecond
-                    (DataHelper.getValidAmount(), DataHelper.getFirstCardNumber());
+        dashboardPageOfCardsRecharge.transferMoney(DashboardPageOfCards.clickSecondButton(),
+                DataHelper.getValidAmount(), DataHelper.getFirstCardNumber());
 
         val expectedBalanceFirstCardAfterTransfer = dashboardPageOfCards.getFirstCardBalance();
         val expectedBalanceSecondCardAfterTransfer = dashboardPageOfCards.getSecondCardBalance();
@@ -39,7 +39,7 @@ public class MoneyTransferTests {
         assertEquals(expectedBalanceSecondCardAfterTransfer, actualChangedSecondCardBalance);
 
         dashboardPageOfCardsRecharge.returnCardsBalancesToInitialAmounts
-                (DataHelper.getSecondCardNumber());
+                (DashboardPageOfCards.clickFirstButton(), DataHelper.getSecondCardNumber());
 
         val initialBalanceFirstCardBeforTransfer = dashboardPageOfCards.getFirstCardBalance();
         val initialBalanceSecondCardBeforTransfer = dashboardPageOfCards.getSecondCardBalance();
@@ -63,8 +63,8 @@ public class MoneyTransferTests {
         val balanceFirstCardBeforTransfer = dashboardPageOfCards.getFirstCardBalance();
         val balanceSecondCardBeforTransfer = dashboardPageOfCards.getSecondCardBalance();
 
-        dashboardPageOfCardsRecharge.transferMoneyFromFirstCardToTheSecond
-                (DataHelper.getInvalidAmount(), DataHelper.getFirstCardNumber());
+        dashboardPageOfCardsRecharge.transferMoney (DashboardPageOfCards.clickSecondButton(),
+                DataHelper.getInvalidAmount(), DataHelper.getFirstCardNumber());
 
         val balanceFirstCardAfterTransfer = dashboardPageOfCards.getFirstCardBalance();
         val balanceSecondCardAfterTransfer = dashboardPageOfCards.getSecondCardBalance();
@@ -73,5 +73,4 @@ public class MoneyTransferTests {
         assertEquals(balanceSecondCardBeforTransfer, balanceSecondCardAfterTransfer);
 
     }
-
 }
