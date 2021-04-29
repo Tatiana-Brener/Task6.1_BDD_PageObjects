@@ -12,6 +12,7 @@ public class DashboardPageOfCards {
     private ElementsCollection cards = $$(".list__item");
     private final String balanceStart = "баланс: ";
     private final String balanceFinish = " р.";
+    private static ElementsCollection buttonsRefill = $$("[data-test-id=action-deposit]");
 
     public DashboardPageOfCards() {
 
@@ -33,5 +34,19 @@ public class DashboardPageOfCards {
         val finish = text.indexOf(balanceFinish);
         val value = text.substring(start + balanceStart.length(), finish);
         return Integer.parseInt(value);
+    }
+
+    public static class buttonForTransfer {
+        private ElementsCollection buttonsRefill;
+    }
+
+    public static ElementsCollection clickFirstButton() {
+        buttonsRefill.first().click();
+        return buttonsRefill;
+    }
+
+    public static ElementsCollection clickSecondButton() {
+        buttonsRefill.last().click();
+        return buttonsRefill;
     }
 }
